@@ -2,9 +2,24 @@ package br.com.bandtec.AgendaDeObjetivos.controller;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+
+@Entity
+@Table(name = "TBD_OBJETIVOS")
 public class Objetivo {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@JsonProperty
 	private String titulo;
@@ -13,13 +28,13 @@ public class Objetivo {
 	private String descricao;
 
 	@JsonProperty
+	@Column(name = "DATA_MAXIMA_PARA_EXECUCAO")
 	private LocalDate dataMaximaParaExecucao;
 
 	public Objetivo() {
 	}
 
 	public Objetivo(String titulo, String descricao, LocalDate dataMaximaParaExecucao) {
-		super();
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.dataMaximaParaExecucao = dataMaximaParaExecucao;
@@ -35,15 +50,16 @@ public class Objetivo {
 		return dataMaximaParaExecucao.isBefore(data) || dataMaximaParaExecucao.isEqual(data);
 	}
 
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public LocalDate getDataMaximaParaExecucao() {
-		return dataMaximaParaExecucao;
-	}
+//	public String getTitulo() {
+//		return titulo;
+//	}
+//
+//	public String getDescricao() {
+//		return descricao;
+//	}
+//
+//	public LocalDate getDataMaximaParaExecucao() {
+//		return dataMaximaParaExecucao;
+//	}
+	
 }
