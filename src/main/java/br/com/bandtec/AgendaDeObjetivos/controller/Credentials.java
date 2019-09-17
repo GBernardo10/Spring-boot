@@ -3,19 +3,18 @@ package br.com.bandtec.AgendaDeObjetivos.controller;
 public class Credentials {
 
 	private String login;
-	private String password;
+	private String senha;
 
-	public Credentials(String login, String password) {
+	public Credentials(String login, String senha) {
 		this.login = login;
-		this.password = password;
-		// TODO Auto-generated constructor stub
+		this.senha = senha;
 	}
 
 	public String getLogin() {
 		return login;
 	}
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
 }

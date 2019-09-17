@@ -22,8 +22,8 @@ public class ObjetivoController {
 
 	@PostMapping("/objetivos")
 	public ResponseEntity<String> cadastraObjetivo(@RequestBody Objetivo objetivo) {
-		todosObjetivos.salvar(objetivo);
-		return ResponseEntity.ok("Sucesso");
+		todosObjetivos.save(objetivo);
+		return ResponseEntity.ok("Sucesso");	
 	}
 
 	@GetMapping("/objetivos/data/{data}")
