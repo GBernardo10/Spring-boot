@@ -1,4 +1,4 @@
-package br.com.bandtec.AgendaDeObjetivos.controller;
+package br.com.bandtec.AgendaDeObjetivos.model;
 
 import java.time.LocalDate;
 
@@ -11,12 +11,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
 @Entity
 @Table(name = "TBD_OBJETIVOS")
-public class Objetivo {
-	
+public class Objective {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -31,10 +29,10 @@ public class Objetivo {
 	@Column(name = "DATA_MAXIMA_PARA_EXECUCAO")
 	private LocalDate dataMaximaParaExecucao;
 
-	public Objetivo() {
+	public Objective() {
 	}
 
-	public Objetivo(String titulo, String descricao, LocalDate dataMaximaParaExecucao) {
+	public Objective(String titulo, String descricao, LocalDate dataMaximaParaExecucao) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.dataMaximaParaExecucao = dataMaximaParaExecucao;
@@ -49,17 +47,4 @@ public class Objetivo {
 	public boolean ate(LocalDate data) {
 		return dataMaximaParaExecucao.isBefore(data) || dataMaximaParaExecucao.isEqual(data);
 	}
-
-//	public String getTitulo() {
-//		return titulo;
-//	}
-//
-//	public String getDescricao() {
-//		return descricao;
-//	}
-//
-//	public LocalDate getDataMaximaParaExecucao() {
-//		return dataMaximaParaExecucao;
-//	}
-	
 }

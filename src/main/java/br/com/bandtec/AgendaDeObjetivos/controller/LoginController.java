@@ -1,48 +1,30 @@
 package br.com.bandtec.AgendaDeObjetivos.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.bandtec.AgendaDeObjetivos.repository.AllUser;
+import br.com.bandtec.AgendaDeObjetivos.service.Credentials;;
 
 @RestController
 public class LoginController {
 
-	private TodosUsuarios todosUsuarios;
+	private AllUser allUser;
 
 	@Autowired
-	public LoginController(TodosUsuarios todosUsuarios) {
-		this.todosUsuarios = todosUsuarios;
+	public LoginController(AllUser allUser) {
+		this.allUser = allUser;
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> validar(@RequestBody Credentials credentials) {
-		if (todosUsuarios.existe(credentials.getLogin(), credentials.getSenha()) == null) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("erro");
+	public ResponseEntity<String> existeUsuario(@RequestBody Credentials credentials) {
+		if (allUser.validaLoginESenha(credentials.getLogin(), credentials.getPassword()) == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("falso");
 		}
 		return ResponseEntity.ok("Sucesso");
 	}
 
-	@PostMapping("/usuarios")
-	public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario) {
-		return ResponseEntity.ok(todosUsuarios.save(usuario));
-	}
-
-	@GetMapping("/usuarios")
-	public ResponseEntity<List<Usuario>> buscarUsuarios() {
-		return ResponseEntity.ok(todosUsuarios.findAll());
-	}
-
-//	@PostMapping("/login")
-//	public ResponseEntity<String> validateLogin(@RequestBody Credentials credentials) {
-//		if (credentials.getPassword().equals(credentials.getLogin())) {
-//			return ResponseEntity.ok("Success");
-//		}
-//		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed");
-//	}
 }

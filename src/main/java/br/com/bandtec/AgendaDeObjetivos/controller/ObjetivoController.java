@@ -10,24 +10,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bandtec.AgendaDeObjetivos.model.Objective;
+import br.com.bandtec.AgendaDeObjetivos.repository.AllObjective;
+
 @RestController
 public class ObjetivoController {
 
-	private TodosObjetivos todosObjetivos;
+	private AllObjective todosObjetivos;
 
 	@Autowired
-	public ObjetivoController(TodosObjetivos todosObjetivos) {
+	public ObjetivoController(AllObjective todosObjetivos) {
 		this.todosObjetivos = todosObjetivos;
 	}
 
 	@PostMapping("/objetivos")
-	public ResponseEntity<String> cadastraObjetivo(@RequestBody Objetivo objetivo) {
+	public ResponseEntity<String> cadastraObjetivo(@RequestBody Objective objetivo) {
 		todosObjetivos.save(objetivo);
 		return ResponseEntity.ok("Sucesso");	
 	}
 
 	@GetMapping("/objetivos/data/{data}")
-	public List<Objetivo> buscar(@PathVariable("data") String dataString) {
+	public List<Objective> buscar(@PathVariable("data") String dataString) {
 		LocalDate data = LocalDate.parse(dataString);
 		return todosObjetivos.ate(data);
 	}
