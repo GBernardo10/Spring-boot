@@ -21,10 +21,10 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> existeUsuario(@RequestBody Credentials credentials) {
-		if (allUser.validaLoginESenha(credentials.getLogin(), credentials.getPassword()) == null) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("falso");
+		if (allUser.validaLoginESenha(credentials) == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed");
 		}
-		return ResponseEntity.ok("Sucesso");
+		return ResponseEntity.ok("Success");
 	}
 
 }

@@ -34,5 +34,10 @@ public class ObjetivoController {
 		LocalDate data = LocalDate.parse(dataString);
 		return todosObjetivos.ate(data);
 	}
+	
+	@GetMapping("/objetivos")
+	public ResponseEntity<List<Objective>> cadastraObjetivo() {
+		return ResponseEntity.ok(todosObjetivos.findAll());	
+	}
 
 }
