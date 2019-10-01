@@ -1,12 +1,13 @@
 package br.com.bandtec.AgendaDeObjetivos.model;
 
+import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,6 +29,9 @@ public class User {
 	private String name;
 	@JsonProperty
 	private Integer age;
+	
+	@OneToMany(mappedBy = "users")
+	private List<Objective> objective;
 
 	// construtor
 	public User(String name, Integer age) {

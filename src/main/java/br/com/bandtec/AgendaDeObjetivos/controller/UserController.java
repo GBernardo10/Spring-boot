@@ -5,16 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bandtec.AgendaDeObjetivos.repository.AllUser;
 import br.com.bandtec.AgendaDeObjetivos.model.User;
+import br.com.bandtec.AgendaDeObjetivos.repository.AllUser;;
+
 
 /**
  * UserController
  */
+
 @RestController
 public class UserController {
 
@@ -34,5 +37,15 @@ public class UserController {
     public ResponseEntity<List<User>> buscarUsuarios() {
         return ResponseEntity.ok(allUser.findAll());
     }
-
+    
+    
+    @GetMapping("/usuarios/nome/{username}")
+    public ResponseEntity<List<User>> findByOneUser(@PathVariable("username")String nome){
+    	List<User>users = allUser.findByName(nome);
+    	if(users.isEmpty()) {
+    		return ResponseEntity.noContent().build();
+    	}
+        return ResponseEntity.ok(users);
+    }
+    
 }

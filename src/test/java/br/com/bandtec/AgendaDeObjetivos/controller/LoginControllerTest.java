@@ -1,5 +1,7 @@
 package br.com.bandtec.AgendaDeObjetivos.controller;
 
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -27,6 +29,7 @@ public class LoginControllerTest {
 	public void loginSuccess() {
 		Credentials credentials = new Credentials("igual", "igual");
 		Mockito.when(allUser.validaLoginESenha(credentials)).thenReturn(new User("nome", 23));
+		
 		ResponseEntity<String> response = loginController.existeUsuario(credentials);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("Success", response.getBody());
@@ -34,7 +37,10 @@ public class LoginControllerTest {
 
 	@Test
 	public void loginError() {
-		ResponseEntity<String> response = loginController.existeUsuario(new Credentials("login", "senha"));
+		Credentials credentials = new Credentials("login","senha");		
+		Mockito.when(allUser.validaLoginESenha(credentials)).thenReturn(null);
+		
+		ResponseEntity<String> response = loginController.existeUsuario(credentials);
 		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
 		assertEquals("Failed", response.getBody());
 
