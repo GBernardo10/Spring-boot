@@ -1,0 +1,6 @@
+#FileLock
+#Mon Nov 04 21:12:24 BRST 2019
+hostName=HSL200
+id=16e38b0d816bbdd88bce557e8dca84c9bb0535ae987
+method=file
+server=10.0.4.243\:52921

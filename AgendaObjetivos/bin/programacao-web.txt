@@ -1,0 +1,6 @@
+deploy antigamente -> tinhamos o software servidor (TomCat)
+tomcat suporta tecnologia Java.
+
+tomcat tem diversas bibliotecas que ajuda a manter a aplicação no "ar"
+
+hoje o deploy utilizando o spring 
