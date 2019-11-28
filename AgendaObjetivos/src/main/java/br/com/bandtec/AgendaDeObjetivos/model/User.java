@@ -20,28 +20,39 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Embedded
 	@JsonProperty
-	private Credentials credentials; 
-	
+	private Credentials credentials;
+
 	@JsonProperty
 	private String name;
 	@JsonProperty
 	private Integer age;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Objective> objective;
 
 	// construtor
 	public User(String name, Integer age) {
 		this.name = name;
-		this.age = age; 
+		this.age = age;
 	}
 
 	public User() {
 
-	}
+    }
+
+    public void acompanhaEvento(Evento e){
+        e.addEventoListener(
+            new EventoAdapter(){
+                public void eventoChegou(EventoEvent ev){
+                    System.out.print("Recebido");
+                    ((Evento)(ev.getSource())).olhaEvento();
+                }
+            }
+        )
+    }
 
 	@Override
 	public String toString() {
