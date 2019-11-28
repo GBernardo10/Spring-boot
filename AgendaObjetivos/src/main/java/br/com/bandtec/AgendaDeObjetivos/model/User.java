@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.bandtec.AgendaDeObjetivos.patterns.EventoAdapter;
+import br.com.bandtec.AgendaDeObjetivos.patterns.EventoEvent;
 import br.com.bandtec.AgendaDeObjetivos.service.Credentials;
 
 @Entity
@@ -48,10 +50,10 @@ public class User {
             new EventoAdapter(){
                 public void eventoChegou(EventoEvent ev){
                     System.out.print("Recebido");
-                    ((Evento)(ev.getSource())).olhaEvento();
+                    ((Evento)(ev.getSource())).recebeEvento();
                 }
             }
-        )
+        );
     }
 
 	@Override
